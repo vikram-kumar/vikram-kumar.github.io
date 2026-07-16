@@ -231,23 +231,30 @@ function initNavigation(){
 
 }
 
-/* ==========================================================
-   HERO FADE
-========================================================== */
+/*=========================================================
+HERO FADE
+=========================================================*/
 
-function initHero(){
+const hero = document.getElementById("hero");
 
-    if(!hero) return;
+function updateHeroFade(){
 
-    window.addEventListener("scroll",()=>{
+    // Disable fade on tablets & mobiles
+    if(window.innerWidth <= 768){
 
-        const y=window.scrollY;
+        hero.style.opacity = 1;
+        return;
 
-        hero.style.opacity=Math.max(1-y/700,.2);
+    }
 
-    });
+    const y = window.scrollY;
+
+    hero.style.opacity = Math.max(1 - y / 700, 0.2);
 
 }
+
+window.addEventListener("scroll", updateHeroFade);
+window.addEventListener("resize", updateHeroFade);
 
 /* ==========================================================
    INITIALIZE UI
