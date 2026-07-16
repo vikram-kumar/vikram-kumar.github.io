@@ -1260,3 +1260,21 @@ LIGHTBOX
 
 }
 
+#lightboxVideo{
+
+    display:none;
+
+    max-width:92vw;
+
+    max-height:90vh;
+
+    border-radius:14px;
+
+}
+
+#lightboxImage{
+
+    display:none;
+
+}
+
