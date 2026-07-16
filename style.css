@@ -1157,6 +1157,8 @@ THUMBNAIL
 
     transition:.35s;
 
+    pointer-events:none;
+
 }
 
 .galleryItem:hover .galleryVideo{

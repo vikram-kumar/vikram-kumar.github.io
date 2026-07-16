@@ -522,3 +522,13 @@ else{
     console.error("Lightbox HTML is missing.");
 
 }
+
+document.querySelectorAll(".galleryVideo").forEach(video => {
+
+    console.log(video.controls);
+
+    video.controls = false;
+
+    video.removeAttribute("controls");
+
+});
