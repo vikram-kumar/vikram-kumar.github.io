@@ -81,9 +81,9 @@ VARIABLES
 
     --transition:.28s ease;
 
-    --gallery-thumb-desktop:165px;
+    --gallery-thumb-desktop:120px;
 
-    --gallery-thumb-mobile:120px;
+    --gallery-thumb-mobile:60px;
 }
 
 /*==========================
