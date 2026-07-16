@@ -433,6 +433,8 @@ LIGHTBOX
 const lightbox = document.getElementById("lightbox");
 const lightboxImage = document.getElementById("lightboxImage");
 const lightboxVideo = document.getElementById("lightboxVideo");
+lightboxVideo.controls = false;
+lightboxVideo.removeAttribute("controls");
 const closeButton = document.querySelector(".lightboxClose");
 
 console.log("Gallery Items :", document.querySelectorAll(".galleryItem").length);
