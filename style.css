@@ -1143,6 +1143,27 @@ THUMBNAIL
 
 }
 
+.galleryVideo{
+
+    display:block;
+
+    max-width:220px;
+
+    width:auto;
+
+    height:auto;
+
+    border-radius:14px;
+
+    transition:.35s;
+
+}
+
+.galleryItem:hover .galleryVideo{
+
+    transform:scale(1.04);
+
+}
 /*=========================================================
 GIF SUPPORT
 =========================================================*/
@@ -1238,3 +1259,4 @@ LIGHTBOX
     color:black;
 
 }
+

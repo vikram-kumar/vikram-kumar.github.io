@@ -435,17 +435,41 @@ const lightbox = document.getElementById("lightbox");
 
 const lightboxImage = document.getElementById("lightboxImage");
 
+const lightboxVideo = document.getElementById("lightboxVideo");
+
 const closeButton = document.querySelector(".lightboxClose");
 
-document.querySelectorAll(".galleryItem img").forEach(image=>{
+document.querySelectorAll(".galleryItem").forEach(item=>{
 
-    image.addEventListener("click",()=>{
+    item.addEventListener("click",()=>{
 
-        lightboxImage.src = image.src;
+        const img = item.querySelector("img");
+        const video = item.querySelector("video");
 
         lightbox.classList.add("active");
 
         document.body.style.overflow="hidden";
+
+        if(img){
+
+            lightboxVideo.style.display="none";
+            lightboxVideo.pause();
+
+            lightboxImage.style.display="block";
+            lightboxImage.src=img.src;
+
+        }
+
+        if(video){
+
+            lightboxImage.style.display="none";
+
+            lightboxVideo.style.display="block";
+            lightboxVideo.src=video.currentSrc;
+
+            lightboxVideo.play();
+
+        }
 
     });
 
@@ -455,6 +479,11 @@ function closeLightbox(){
 
     lightbox.classList.remove("active");
 
+    lightboxVideo.pause();
+
+    lightboxImage.src="";
+    lightboxVideo.src="";
+
     document.body.style.overflow="";
 
 }
@@ -463,7 +492,7 @@ closeButton.addEventListener("click",closeLightbox);
 
 lightbox.addEventListener("click",(e)=>{
 
-    if(e.target===lightbox || e.target.classList.contains("lightboxBackdrop")){
+    if(e.target===lightbox){
 
         closeLightbox();
 
