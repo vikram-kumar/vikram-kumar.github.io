@@ -1,0 +1,1 @@
+Add videos to assets/videos and replace placeholder divs with video tags.
