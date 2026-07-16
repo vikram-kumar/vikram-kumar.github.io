@@ -432,80 +432,94 @@ LIGHTBOX
 =========================================================*/
 
 const lightbox = document.getElementById("lightbox");
-
 const lightboxImage = document.getElementById("lightboxImage");
-
 const lightboxVideo = document.getElementById("lightboxVideo");
-
 const closeButton = document.querySelector(".lightboxClose");
 
-document.querySelectorAll(".galleryItem").forEach(item=>{
+console.log("Gallery Items :", document.querySelectorAll(".galleryItem").length);
+console.log("Lightbox :", lightbox);
+console.log("Lightbox Image :", lightboxImage);
+console.log("Lightbox Video :", lightboxVideo);
 
-    item.addEventListener("click",()=>{
+if(lightbox && lightboxImage && lightboxVideo && closeButton){
 
-        const img = item.querySelector("img");
-        const video = item.querySelector("video");
+    document.querySelectorAll(".galleryItem").forEach(item=>{
 
-        lightbox.classList.add("active");
+        item.addEventListener("click",()=>{
 
-        document.body.style.overflow="hidden";
+            console.log("Gallery item clicked");
 
-        if(img){
+            const img = item.querySelector("img");
+            const video = item.querySelector("video");
 
-            lightboxVideo.style.display="none";
-            lightboxVideo.pause();
+            lightbox.classList.add("active");
+            document.body.style.overflow="hidden";
 
-            lightboxImage.style.display="block";
-            lightboxImage.src=img.src;
+            if(img){
 
-        }
+                console.log("Opening Image :", img.src);
 
-        if(video){
+                lightboxVideo.pause();
+                lightboxVideo.style.display="none";
 
-            lightboxImage.style.display="none";
+                lightboxImage.style.display="block";
+                lightboxImage.src = img.src;
+            }
 
-            lightboxVideo.style.display="block";
-            lightboxVideo.src=video.currentSrc;
+            else if(video){
 
-            lightboxVideo.play();
+                console.log("Opening Video :", video.currentSrc);
+
+                lightboxImage.style.display="none";
+
+                lightboxVideo.style.display="block";
+                lightboxVideo.src = video.currentSrc;
+
+                lightboxVideo.play();
+            }
+
+        });
+
+    });
+
+    function closeLightbox(){
+
+        lightbox.classList.remove("active");
+
+        lightboxImage.src = "";
+
+        lightboxVideo.pause();
+        lightboxVideo.src = "";
+
+        document.body.style.overflow="";
+
+    }
+
+    closeButton.addEventListener("click",closeLightbox);
+
+    lightbox.addEventListener("click",(e)=>{
+
+        if(e.target===lightbox){
+
+            closeLightbox();
 
         }
 
     });
 
-});
+    document.addEventListener("keydown",(e)=>{
 
-function closeLightbox(){
+        if(e.key==="Escape"){
 
-    lightbox.classList.remove("active");
+            closeLightbox();
 
-    lightboxVideo.pause();
+        }
 
-    lightboxImage.src="";
-    lightboxVideo.src="";
-
-    document.body.style.overflow="";
+    });
 
 }
+else{
 
-closeButton.addEventListener("click",closeLightbox);
+    console.error("Lightbox HTML is missing.");
 
-lightbox.addEventListener("click",(e)=>{
-
-    if(e.target===lightbox){
-
-        closeLightbox();
-
-    }
-
-});
-
-document.addEventListener("keydown",(e)=>{
-
-    if(e.key==="Escape"){
-
-        closeLightbox();
-
-    }
-
-});
+}
