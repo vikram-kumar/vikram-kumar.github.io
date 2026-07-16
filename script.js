@@ -265,7 +265,7 @@ initNavbar();
 
 initNavigation();
 
-initHero();
+//initHero();
 
 /* ==========================================================
    VIDEO MANAGER
