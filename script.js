@@ -235,7 +235,6 @@ function initNavigation(){
 HERO FADE
 =========================================================*/
 
-const hero = document.getElementById("hero");
 
 function updateHeroFade(){
 
