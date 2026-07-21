@@ -277,13 +277,11 @@ function initVideoManager(){
 
     if(videos.length===0) return;
 
-    let activeVideo = null;
 
     videos.forEach(video=>{
 
         video.controls = false;
 
-        video.dataset.userPaused = "false";
 
         let hideTimer = null;
 
@@ -315,31 +313,8 @@ function initVideoManager(){
 
         }
 
-        /* -----------------------------
-           Manual Pause
-        ----------------------------- */
-
-        video.addEventListener("pause",()=>{
-
-            if(video.dataset.autoPaused!=="true"){
-
-                video.dataset.userPaused="true";
-
-            }
-
-        });
-
-        /* -----------------------------
-           Manual Play
-        ----------------------------- */
-
-        video.addEventListener("play",()=>{
-
-            video.dataset.userPaused="false";
-
-            activeVideo = video;
-
-        });
+        
+       
 
     });
 
@@ -347,58 +322,34 @@ function initVideoManager(){
        Viewport Observer
     ----------------------------- */
 
-    const observer = new IntersectionObserver(entries=>{
+const observer = new IntersectionObserver(entries => {
 
-        entries.forEach(entry=>{
+    entries.forEach(entry => {
 
-            const video = entry.target;
+        const video = entry.target;
 
-            if(entry.isIntersecting){
+        if(entry.isIntersecting){
 
-                if(video.dataset.userPaused==="true"){
+            video.play().catch(()=>{});
 
-                    return;
+        }
+        else{
 
-                }
+            video.pause();
 
-                if(activeVideo && activeVideo!==video){
-
-                    activeVideo.dataset.autoPaused="true";
-
-                    activeVideo.pause();
-
-                    activeVideo.dataset.autoPaused="false";
-
-                }
-
-                video.play().catch(()=>{});
-
-                activeVideo = video;
-
-            }
-            else{
-
-                video.dataset.autoPaused="true";
-
-                video.pause();
-
-                video.dataset.autoPaused="false";
-
-            }
-
-        });
-
-    },{
-
-        threshold:0.5
+        }
 
     });
 
-    videos.forEach(video=>{
+},{
+    threshold:0.3
+});
 
-        observer.observe(video);
+document.querySelectorAll(".portfolioVideo").forEach(video=>{
 
-    });
+    observer.observe(video);
+
+});
 
 }
 
